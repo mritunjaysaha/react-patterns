@@ -13,6 +13,25 @@
             -   When using the **React.children.map** to provide the values, the component nesting is limited. Only direct children of the parent component will have access to the **open** and **toggle** props, meaning we can't wrap any of these components in another component.
             -   Cloning an element with **React.cloneElement** performs a shallow merge. Already existing props will be merged together with the new props has the same name as the props we're passing to the **React.cloneElement** method.
             -   As the props are shallowly merged, the value of that prop will be overwritten with the latest value that we pass.
+            -
+
+```jsx
+// cons of using compound pattern
+export default function FlyoutMenu() {
+    return (
+        <FlyOut>
+            {/* This breaks */}
+            <div>
+                <FlyOut.Toggle />
+                <FlyOut.List>
+                    <FlyOut.Item>Edit</FlyOut.Item>
+                    <FlyOut.Item>Delete</FlyOut.Item>
+                </FlyOut.List>
+            </div>
+        </FlyOut>
+    );
+}
+```
 
 # React + TypeScript + Vite
 
