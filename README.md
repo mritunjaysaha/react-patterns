@@ -58,7 +58,7 @@ export default function FlyoutMenu() {
 -   The behavior is not spread throughout the application, only one or a few components use the behavior.
 -   The behavior adds many properties to the component.
 
-### Pros and Cons
+##### Pros and Cons
 
 -   **Pros**
 
@@ -66,6 +66,101 @@ export default function FlyoutMenu() {
 
 -   **Cons**
     -   The name of the prop that a HOC can pass to an element, can cause a naming collision.
+
+#### Hooks Pattern
+
+[Reference](https://www.patterns.dev/react/hooks-pattern)
+
+-   Hooks make it possible to use React state and lifecycle methods, without having to use class components.
+-   Hooks are not necessarily a design pattern.
+-   Hooks play a very important role in your application design.
+-   Many traditional design patterns can be replaced by Hooks.
+
+##### **Down sides of using class components**
+
+-   The common way to share code among several components, is by using the **Higher Order Component** or **Render Props pattern**. Although _both patterns are valid and a good practice_, adding those patterns at a **later point in time** requires you to **restructure your application**.
+
+```jsx
+<WrapperOne>
+    <WrapperTwo>
+        <WrapperThree>
+            <WrapperFour>
+                <WrapperFive>
+                    <Component>
+                        <h1>Finally in the component!</h1>
+                    </Component>
+                </WrapperFive>
+            </WrapperFour>
+        </WrapperThree>
+    </WrapperTwo>
+</WrapperOne>
+```
+
+-   The **wrapper hell** can make it difficult to understand how data is flowing through your application, which can make it harder to figure out why unexpected behavior is happening.
+
+##### Why to use Hooks
+
+-   Class components aren’t always a great feature in React.
+-   To solve the common issues that React developers can run into when using class components, React introduced React Hooks.
+-   React Hooks are functions that you can use to manage a components state and lifecycle methods.
+    -   React hooks made it possible to:
+        -   add state to a functional component.
+        -   manage a component's lifecycle without having to use lifecycle methods such as **componentDidMount** and **componentWillUnmount**.
+        -   reuse the same stateful logic among multiple components throughout the app.
+
+##### Types of Hooks
+
+-   State hook
+
+    -   React provides a hook that manages state within a functional component, called **useState**.
+    -   In order to use the **useState** hook, we need to access the **useState** method that React provides for us. The **useState** method expects an argument: this is the initial value of the state, an empty string in this case.
+    -   We can destructure two values from the **useState** method
+
+        -   The **current value** of the state
+        -   The **method with which we can update** the state
+
+        ```jsx
+        const [value, setValue] = React.useState(initialValue);
+        ```
+
+-   Effect hook
+
+    -   with the **useEffect** hook, we can _"hook into"_ a components lifecycle. The **useEffect** hook effectively combines the **componentDidMount**, **componentDidUpdate**, and **componentWillUnmount** lifecycle methods.
+
+    ```jsx
+    componentDidMount(){... }
+    useEffect(()=> {...}, [])
+
+    componentWillUnmount(){...}
+    useEffect(()=> {return ()=> {...}}, [])
+
+    componentDidUpdate(){...}
+    useEffect(()=>{...})
+    ```
+
+-   Custom hook
+    -   Besides the built-in hooks that React provides (**useState**, **useEffect**, **useReducer**, **useRef**, **useContext**, **useMemo**, **useImperativeHandle**. **useLayoutEffect**, **useDebugValue**, **useCallback**).
+    -   It's important to start your hooks with **use** in order for React to check if it violates the **rules of Hooks**.
+        -   Only call hooks at the **Top Level**.
+        -   Only call hooks from **React Functions**.
+            -   Call hooks from React function components.
+            -   Call hooks from custom hooks
+
+##### Pros and Cons of Hooks Patterns
+
+-   **Pros**
+    -   **Fewer lines of code**
+        -   Hooks allows us to group code by concern and functionality, and not by lifecycle. This makes the code not only cleaner and concise but also shorter.
+    -   **Simplifies complex components**
+        -   JS classes can be difficult to manage, hard to use with hot reloading and may not minify as well. React Hooks solves these problems and ensures functional programming is made easy. With the implementation of Hooks, We don't need to have class components.
+    -   **Reusing stateful logic**
+        -   Class in js encourage multiple levels of inheritance that quickly increase overall complexity and potential for errors. Howeverm Hooks allow you to use state, and other React features without writing a class. With react, you can always reuse stateful logic without the need to rewrite the code over and over again. This reduces the chances of errors and allows for composition with plain functions.
+    -   **Sharing non-visual logic**
+        -   Until the implementation of Hooks, React had no way of extracting and sharing non-visual logic. This eventually led to more complexities, such as HOC patterns and Render props, just to solve a common problem. But, the introduction of Hooks has solved this problem because it allows for the extraction of stateful logic to a simple JavaScript function.
+-   **Cons**
+    -   Have to respect its rules, without a linter plugin, it is difficult to know which rule has been broken.
+    -   Need a considerable time practicing to use properly (Exp: useEffect).
+    -   Be aware of the wrong use (Exp: useCallback, useMemo).
 
 # React + TypeScript + Vite
 
