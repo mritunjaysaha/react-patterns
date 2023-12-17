@@ -200,6 +200,24 @@ By using hook, we no longer need the wrapping **Container** component to fetch t
 -   Hooks made it possible to achieve the same result without having to use the **Container/Presentational pattern**, ans without having to rewrite a stateless functional component into a class component.
 -   Can easily be an overkill in smaller sized application.
 
+#### Render props pattern
+
+-   A render props is a props on a component, which value is a function that returns a JSX element. The component itself does not render anything besides the render prop. Instead, the component simply calls the render props, instead of implementing its own rendering logic.
+-   In some cases, we can replace render props with hooks.
+
+**Pros**
+
+-   Sharing logic and data among several components is easy with the render props pattern.
+-   Components can be made very reusable, by using a render or **children** prop. Although the HOC pattern mainly solves the same issues, namely **reusability** and **sharing data**, the render props pattern solves some of the issues we could encounter by using the HOC pattern.
+-   The issue of **naming collisions** that we can run into using the HOC pattern no longer applies by using the render props pattern, since we don't automatically merge props. We explicitly pass the props down to the child components, with the value provided by the parent component.
+-   Since we explicitly pass props, we solve the HOC's implicit props issue. The props that should get passed down to the element, are all visible in the render prop's arguments list.
+-   We can separate our app's logic from rendering components through render props. The stateful component that receives a render prop can pass the data onto stateless components, which merely render the data.
+
+**Cons**
+
+-   The issues that we tried to solve with render props, have largely been replaced by React Hooks. As hooks changed the way we can add reusability and data sharing to components, they can replace the render props pattern in many cases.
+-   We can't add lifecycle methods to a **render** prop, we can only use it on components that don't need to alter the data they receive.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
