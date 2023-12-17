@@ -164,6 +164,8 @@ export default function FlyoutMenu() {
 
 ### Container / Presentational Pattern
 
+[Reference](https://www.patterns.dev/react/presentational-container-pattern)
+
 -   One way to enforce separation of concerns.
 
 #### Presentational component
@@ -201,6 +203,8 @@ By using hook, we no longer need the wrapping **Container** component to fetch t
 -   Can easily be an overkill in smaller sized application.
 
 #### Render props pattern
+
+[Reference](https://www.patterns.dev/react/render-props-pattern)
 
 -   A render props is a props on a component, which value is a function that returns a JSX element. The component itself does not render anything besides the render prop. Instead, the component simply calls the render props, instead of implementing its own rendering logic.
 -   In some cases, we can replace render props with hooks.
