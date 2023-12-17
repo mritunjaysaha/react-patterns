@@ -1,6 +1,6 @@
 # React Patterns
 
-### Design Patterns
+## Design Patterns
 
 #### Compound Pattern
 
@@ -161,6 +161,44 @@ export default function FlyoutMenu() {
     -   Have to respect its rules, without a linter plugin, it is difficult to know which rule has been broken.
     -   Need a considerable time practicing to use properly (Exp: useEffect).
     -   Be aware of the wrong use (Exp: useCallback, useMemo).
+
+### Container / Presentational Pattern
+
+-   One way to enforce separation of concerns.
+
+#### Presentational component
+
+-   Receives data through **props**. Its primary function is to simply **display the data it receives** the way we want them to, including styles, without **modifying** that data.
+-   Receives their data from **container components**.
+
+#### Container components
+
+-   Primary function of container components is to **pass data** to presentational components, which they contain.
+-   Container components themselves usually don't render any other components besides the presentational components that care about their data.
+-   Since they do not render anything themselves, they usually do not contain any styling either.
+
+**In many cases, the Container/Presentational pattern can be replaced with React Hooks.**
+
+The introduction of Hooks made it easy for developers to add statefulness without needing a container component to provide that state.
+
+Instead of having the data fetching logic logic in the **Container** component, we can create a custom hook that fetches the images, and returns the array of dogs.
+
+By using hook, we no longer need the wrapping **Container** component to fetch the data, and send this to the **Presentational** component. Instead we can use this hook directly in presentational component.
+
+#### Pros and Cons of Container / Presentational component.
+
+**Pros**
+
+-   Encourages separation of concerns.
+-   Presentational components can be pure functions which are responsible for the UI, whereas container components are responsible for the state and data of the application. This makes it easy to enforce the separation of concerns.
+-   Presentational components are easily made reusable, as they display data without altering this data. We can reuse the presentational components throughout our application for different purposes.
+-   If presentational component is reused in many parts of the application, the change can ne consistent throughout the app.
+-   Testing presentational components is easy, as they are usually pure functions.
+
+**Cons**
+
+-   Hooks made it possible to achieve the same result without having to use the **Container/Presentational pattern**, ans without having to rewrite a stateless functional component into a class component.
+-   Can easily be an overkill in smaller sized application.
 
 # React + TypeScript + Vite
 
